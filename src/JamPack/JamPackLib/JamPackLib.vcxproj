@@ -16,6 +16,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ResourcePack.h" />
     <ClInclude Include="ResourcePacker.h" />
+    <ClInclude Include="ResourcePackStream.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -28,6 +29,7 @@
     </ClCompile>
     <ClCompile Include="ResourcePack.cpp" />
     <ClCompile Include="ResourcePacker.cpp" />
+    <ClCompile Include="ResourcePackStream.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4F738603-9501-4DFE-8592-3F6FFB13939A}</ProjectGuid>

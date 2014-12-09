@@ -8,56 +8,53 @@ namespace Jampack
 	//	This is a pack file for resources.
 	//
 
+	/*
+		[PackFile format]
+
+		<header>
+		major.minor
+		name "pack0"
+		ResourceCount
+		<ResTOC>
+		res0 = resoff0
+		res1 = resoff1
+		res2 = resoff2
+		<resoff0>
+		..
+		..
+		<resoff1>
+		..
+		..
+		<resoff2>
+		<end_of_file>
+	*/
+
 	class ResourcePack
 	{
 	public:
-		ResourcePack(const char* name, long initialSize = 2000);
+		ResourcePack();
 		~ResourcePack();
 
-		bool Load(std::wstring fileName);
-		bool Load(std::ifstream& stream);
+		bool Load(__in ResourcePackStream& stream);
+		void Save(__in ResourcePackStream& stream);
 		
-	private:
-		const char* m_szName;
+		const std::string& GetName() const;
 
-		int m_MajorVersion;
-		int m_MinorVersion;
+		uint8_t GetMajorVersion() const;
+		uint8_t GetMinorVersion() const;
 
-	};
-
-
-	//
-	// ResourcePackReader class
-	//
-	class ResourcePackReader
-	{
-	public:
-		ResourcePackReader();
-		~ResourcePackReader();
-
-		bool Open(std::wstring fileName);
-		void Close();
-
-		ULONG32 GetSize();
-		
-		bool GetStream();
+		bool IsValid() const;
 
 	private:
 
-	};
+		std::string m_Name;
 
-	//
-	// ResourcePackWriter class
-	//
-	class ResourcePackWriter
-	{
-	public:
-		ResourcePackWriter();
-		~ResourcePackWriter();
+		bool m_IsValid;
 
-		bool Initialise(const ResourcePack& packFile);
+		uint8_t m_MajorVersion;
+		uint8_t m_MinorVersion;
 
-	private:
-		ResourcePack* m_Pack;
+		// Offsets
+		int m_TOCOffset;
 	};
 }

@@ -38,7 +38,7 @@ namespace Jampack
 	class ResourcePacker
 	{
 	private:
-		typedef std::vector<const std::wstring> FileListCollection;
+		typedef std::vector<const std::string> FileListCollection;
 
 	public:
 
@@ -46,23 +46,31 @@ namespace Jampack
 		~ResourcePacker();
 		
 		// Add the given filename to packer for packing.
-		void AddResource(const std::wstring& fileName);
+		void AddResource(__in const std::string& fileName);
 
 		// Remove the given resource file name from packing.
-		void RemoveResource(const std::wstring& fileName);
+		void RemoveResource(__in const std::string& fileName);
 
 		// Loads the list of files and packs them into a file.
-		void PackImmediately(const std::wstring& outputDirectory);
+		void PackImmediately(__in const std::string& outputDirectory);
 
 
 	private:
 
 		// Finds if the given fileName is in the resource list.
-		bool Find(const std::wstring& fileName, FileListCollection::iterator& iterOut);
+		bool Find(__in const std::string& fileName, __out FileListCollection::const_iterator& iterOut) const;
+
+		bool CanAccessDirectory(__in const std::string& directory) const;
+
+		bool OpenPack(__in const std::string& packFilePath);
+		bool WriteIntoPack(__in const std::vector<void*>& bytes);
+		void ClosePack();
 		
 	private:
 
 		FileListCollection m_FileList;
+
+		std::ofstream m_PackFileStream;
 
 	private:
 		// No copying!
