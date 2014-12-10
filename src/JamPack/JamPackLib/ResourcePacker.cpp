@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "ResourcePackStream.h"
 #include "ResourcePack.h"
 #include "ResourcePacker.h"
 #include "zlib.h"
@@ -53,15 +54,6 @@ bool ResourcePacker::Find(const std::string& fileName, ResourcePacker::FileListC
 	return false;
 }
 
-
-bool ResourcePacker::CanAccessDirectory(const std::string& directory) const
-{
-	if (access(directory.data(), std::ios::in) > 0)
-		return true;
-	else
-		return false;
-}
-
 bool ResourcePacker::OpenPack(const std::string& packFilePath)
 {
 	m_PackFileStream.open(packFilePath);
@@ -71,7 +63,7 @@ bool ResourcePacker::OpenPack(const std::string& packFilePath)
 	return true;
 }
 
-bool ResourcePacker::WriteIntoPack(const std::vector<void*>& bytes)
+bool ResourcePacker::WriteIntoPack(const std::vector<char*>& bytes)
 {
 	if (!m_PackFileStream.write((char*)bytes.data(), bytes.size()))
 		return false;
@@ -104,8 +96,8 @@ void ResourcePacker::PackImmediately(const std::string& outputDirectory)
 		{
 			// Take the stream.
 			std::streamsize size = fs.gcount();
-			std::vector<void*> bytes(size);
-			if (fs.read((char*)bytes.data(), size))
+			std::vector<char*> bytes((int)size);
+			if (fs.read(*(bytes.data()), size))
 			{
 				// Todo: zip it up.
 

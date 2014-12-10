@@ -30,6 +30,12 @@ namespace Jampack
 		void WriteResource();
 
 	private:
-		std::fstream* m_File;
+
+		std::fstream* m_File; // Todo: Make this thread-safe.
+
+	private:
+		// No copying
+		ResourcePackStream(const ResourcePackStream& copy);
+		ResourcePackStream& operator=(const ResourcePackStream& that);
 	};
 }

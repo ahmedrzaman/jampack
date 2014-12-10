@@ -60,10 +60,8 @@ namespace Jampack
 		// Finds if the given fileName is in the resource list.
 		bool Find(__in const std::string& fileName, __out FileListCollection::const_iterator& iterOut) const;
 
-		bool CanAccessDirectory(__in const std::string& directory) const;
-
 		bool OpenPack(__in const std::string& packFilePath);
-		bool WriteIntoPack(__in const std::vector<void*>& bytes);
+		bool WriteIntoPack(__in const std::vector<char*>& bytes);
 		void ClosePack();
 		
 	private:

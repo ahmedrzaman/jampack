@@ -2,8 +2,10 @@
 
 #include <Windows.h>
 #include <stdint.h>
-
-#include <vector>
+#include <assert.h>
 
 #include <io.h>
+
+#include <vector>
 #include <fstream>
+#include <iostream>

@@ -56,5 +56,9 @@ namespace Jampack
 
 		// Offsets
 		int m_TOCOffset;
+
+	private:
+		ResourcePack(const ResourcePack& copy);
+		ResourcePack& operator=(const ResourcePack& that);
 	};
 }
