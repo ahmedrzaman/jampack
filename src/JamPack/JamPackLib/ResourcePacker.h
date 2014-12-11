@@ -33,7 +33,7 @@
 */
 namespace Jampack
 {
-	class ResourcePack;
+	class ResourcePackStream;
 
 	class ResourcePacker
 	{

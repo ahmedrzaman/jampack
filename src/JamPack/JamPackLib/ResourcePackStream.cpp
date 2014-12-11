@@ -69,6 +69,13 @@ void ResourcePackStream::Close()
 		m_file.close();
 }
 
+bool ResourcePackStream::ExtractResource(__in const char* filename, __out uint8_t* outBuff)
+{
+	// Todo
+
+	return false;
+}
+
 const std::string& ResourcePackStream::GetName() const
 {
 	return m_name;

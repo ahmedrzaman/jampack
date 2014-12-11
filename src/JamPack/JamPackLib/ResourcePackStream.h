@@ -34,8 +34,7 @@ namespace Jampack
 		bool Open(__in const char* filename);
 		void Close();
 		
-		bool ExtractResource(__in const char* filename);
-		void StoreResource(__in const char* filepath);
+		bool ExtractResource(__in const char* filename, _Inout_ uint8_t* outBuff);
 
 		const std::string& GetName() const;
 		uint8_t GetMajorVersion() const;
