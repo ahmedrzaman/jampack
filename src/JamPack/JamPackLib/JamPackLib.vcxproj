@@ -14,7 +14,6 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="ResourcePack.h" />
     <ClInclude Include="ResourcePacker.h" />
     <ClInclude Include="ResourcePackStream.h" />
   </ItemGroup>
@@ -27,7 +26,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="ResourcePack.cpp" />
     <ClCompile Include="ResourcePacker.cpp" />
     <ClCompile Include="ResourcePackStream.cpp" />
   </ItemGroup>

@@ -2,36 +2,80 @@
 
 namespace Jampack
 {
+	/*
+	[PackFile format]
+
+	<header>
+	major.minor
+	name "pack0"
+	ResourceCount
+	<ResTOC>
+	res0 = resoff0
+	res1 = resoff1
+	res2 = resoff2
+	<resoff0>
+	..
+	..
+	<resoff1>
+	..
+	..
+	<resoff2>
+	<end_of_file>
+	*/
+
 	class ResourcePackStream
 	{
 	public:
 		ResourcePackStream();
 		~ResourcePackStream();
 
-		_Check_return_ 
-			bool Initialise(__in const char* filename);
+		bool IsValid() const;
+		bool IsOpen() const;
+		bool Open(__in const char* filename);
+		void Close();
+		
+		bool ExtractResource(__in const char* filename);
+		void StoreResource(__in const char* filepath);
 
-		_Check_return_ 
-			bool Initialise(__in std::fstream* stream);
-
-		bool ExtractResource(const char* filename); // ??
-		void StoreResource(const char* filepath); // ??
-
-	private:
-
-		// Reads
-		bool ReadHeader(__out uint8_t& majorVersion, __out uint8_t& minorVersion, __out std::string& name);
-		bool ReadTableOfContent(/*Something will go here*/);
-		bool ReadResource();
-
-		// Writes
-		void WriteHeader(__in const uint8_t majorVersion, __in const uint8_t minorVersion, __in const std::string& name);
-		void WriteTableOfContent(/*something will go here*/);
-		void WriteResource();
+		const std::string& GetName() const;
+		uint8_t GetMajorVersion() const;
+		uint8_t GetMinorVersion() const;
 
 	private:
 
-		std::fstream* m_File; // Todo: Make this thread-safe.
+		void ReadHeader();
+		void ReadTOC();
+		
+		void Read(_Out_writes_bytes_all_(length) uint8_t* outBuf, uint32_t length);
+
+		uint8_t ReadUint8();
+		uint16_t ReadUint16();
+		uint32_t ReadUint32();
+		uint64_t ReadUint64();
+
+		int8_t ReadInt8();
+		int16_t ReadInt16();
+		int32_t ReadInt32();
+		int64_t ReadInt64();
+
+	private:
+
+		std::fstream m_file;
+		bool m_open;
+		bool m_valid;
+		bool m_fail;
+
+		std::string m_name;
+
+		uint8_t m_major;
+		uint8_t m_minor;
+
+		uint32_t m_resCount;
+		std::map<std::string, uint64_t> m_resTable;
+
+		// Offsets
+		uint64_t m_tocOffset;
+		uint64_t m_resStartOffset;
 
 	private:
 		// No copying

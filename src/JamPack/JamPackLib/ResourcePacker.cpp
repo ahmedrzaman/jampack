@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "ResourcePackStream.h"
-#include "ResourcePack.h"
 #include "ResourcePacker.h"
 #include "zlib.h"
 

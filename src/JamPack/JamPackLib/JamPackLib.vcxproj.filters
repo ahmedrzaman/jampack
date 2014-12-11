@@ -21,9 +21,6 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResourcePack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ResourcePacker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,9 +39,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourcePack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ResourcePackStream.cpp">
